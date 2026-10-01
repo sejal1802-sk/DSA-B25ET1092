@@ -1,0 +1,177 @@
+#include <stdio.h>
+
+#define MAX 5
+
+int stack[MAX];
+int top = -1;
+
+void push()
+{
+    int value;
+
+    if (top == MAX - 1)
+    {
+        printf("Stack is full\n");
+    }
+    else
+    {
+        printf("Enter value: ");
+        scanf("%d", &value);
+
+        top++;
+        stack[top] = value;
+
+        printf("Value pushed successfully\n");
+    }
+}
+
+void pop()
+{
+    if (top == -1)
+    {
+        printf("Stack is empty\n");
+    }
+    else
+    {
+        printf("Deleted value = %d\n", stack[top]);
+        top--;
+    }
+}
+
+void peek()
+{
+    if (top == -1)
+    {
+        printf("Stack is empty\n");
+    }
+    else
+    {
+        printf("Top element = %d\n", stack[top]);
+    }
+}
+
+void display()
+{
+    int i;
+
+    if (top == -1)
+    {
+        printf("Stack is empty\n");
+    }
+    else
+    {
+        printf("Stack elements are:\n");
+
+        for (i = top; i >= 0; i--)
+        {
+            printf("%d\n", stack[i]);
+        }
+    }
+}
+
+int main()
+{
+    int choice;
+
+    while (1)
+    {
+        printf("\n--- STACK MENU ---\n");
+        printf("1. Push\n");
+        printf("2. Pop\n");
+        printf("3. Peek\n");
+        printf("4. Display\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1)
+        {
+            push();
+        }
+        else if (choice == 2)
+        {
+            pop();
+        }
+        else if (choice == 3)
+        {
+            peek();
+        }
+        else if (choice == 4)
+        {
+            display();
+        }
+        else
+        {
+            printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
+
+
+OUTPUT :
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 1
+Enter value: 2
+Value pushed successfully
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 1
+Enter value: 18
+Value pushed successfully
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 1
+Enter value: 218
+Value pushed successfully
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 1
+Enter value: 11
+Value pushed successfully
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 2
+Deleted value = 11
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 3
+Top element = 218
+
+--- STACK MENU ---
+1. Push
+2. Pop
+3. Peek
+4. Display
+Enter your choice: 4
+Stack elements are:
+218
+18
+2
+
