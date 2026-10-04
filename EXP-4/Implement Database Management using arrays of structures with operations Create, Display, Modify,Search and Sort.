@@ -1,0 +1,269 @@
+#include <stdio.h>
+
+struct employee
+{
+    int emp_no;
+    char name[20];
+    float salary;
+};
+
+int main()
+{
+    struct employee e[20], temp;
+    int n = 0;
+    int choice, i, j, key, found;
+
+    while(1)
+    {
+        printf("\n\n===== EMPLOYEE DATABASE =====");
+        printf("\n1. Create");
+        printf("\n2. Display");
+        printf("\n3. Search");
+        printf("\n4. Modify");
+        printf("\n5. Sort by Salary");
+        printf("\n6. Exit");
+
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+
+        if(choice == 1)
+        {
+            printf("\nEnter number of employees: ");
+            scanf("%d", &n);
+
+            for(i = 0; i < n; i++)
+            {
+                printf("\nEnter details of employee %d\n", i + 1);
+
+                printf("Employee Number: ");
+                scanf("%d", &e[i].emp_no);
+
+                printf("Name: ");
+                scanf("%s", e[i].name);
+
+                printf("Salary: ");
+                scanf("%f", &e[i].salary);
+            }
+
+            printf("\nEmployee database created successfully.");
+        }
+
+        else if(choice == 2)
+        {
+            if(n == 0)
+            {
+                printf("\nDatabase is empty.");
+            }
+            else
+            {
+                printf("\n----- EMPLOYEE DATABASE -----\n");
+
+                for(i = 0; i < n; i++)
+                {
+                    printf("\nEmployee Number: %d", e[i].emp_no);
+                    printf("\nName: %s", e[i].name);
+                    printf("\nSalary: %.2f\n", e[i].salary);
+                }
+            }
+        }
+
+        else if(choice == 3)
+        {
+            printf("\nEnter employee number to search: ");
+            scanf("%d", &key);
+
+            found = 0;
+
+            for(i = 0; i < n; i++)
+            {
+                if(e[i].emp_no == key)
+                {
+                    printf("\nEmployee Found");
+                    printf("\nEmployee Number: %d", e[i].emp_no);
+                    printf("\nName: %s", e[i].name);
+                    printf("\nSalary: %.2f", e[i].salary);
+
+                    found = 1;
+                    break;
+                }
+            }
+
+            if(found == 0)
+            {
+                printf("\nEmployee Not Found.");
+            }
+        }
+
+        else if(choice == 4)
+        {
+            printf("\nEnter employee number to modify: ");
+            scanf("%d", &key);
+
+            found = 0;
+
+            for(i = 0; i < n; i++)
+            {
+                if(e[i].emp_no == key)
+                {
+                    printf("Enter new name: ");
+                    scanf("%s", e[i].name);
+
+                    printf("Enter new salary: ");
+                    scanf("%f", &e[i].salary);
+
+                    printf("\nEmployee modified successfully.");
+
+                    found = 1;
+                    break;
+                }
+            }
+
+            if(found == 0)
+            {
+                printf("\nEmployee Not Found.");
+            }
+        }
+
+        else if(choice == 5)
+        {
+            for(i = 0; i < n - 1; i++)
+            {
+                for(j = i + 1; j < n; j++)
+                {
+                    if(e[i].salary > e[j].salary)
+                    {
+                        temp = e[i];
+                        e[i] = e[j];
+                        e[j] = temp;
+                    }
+                }
+            }
+
+            printf("\nEmployees sorted by salary successfully.");
+
+            printf("\n----- SORTED DATABASE -----\n");
+
+            for(i = 0; i < n; i++)
+            {
+                printf("\n%d  %s  %.2f",
+                       e[i].emp_no,
+                       e[i].name,
+                       e[i].salary);
+            }
+        }
+
+        else if(choice == 6)
+        {
+            printf("\nProgram ended.");
+            break;
+        }
+
+        else
+        {
+            printf("\nInvalid choice.");
+        }
+    }
+
+    return 0;
+}
+
+OUTPUT:
+===== EMPLOYEE DATABASE =====
+1. Create
+2. Display
+3. Search
+4. Modify
+5. Sort by Salary
+6. Exit
+Enter your choice: 1
+
+Enter number of employees: 2
+
+Enter details of employee 1
+Employee Number: 92
+Name: SEJAL
+Salary: 400000
+
+Enter details of employee 2
+Employee Number: 80
+Name: ANUSHKA
+Salary: 400000
+
+Employee database created successfully.
+
+===== EMPLOYEE DATABASE =====
+1. Create
+2. Display
+3. Search
+4. Modify
+5. Sort by Salary
+6. Exit
+Enter your choice: 2
+
+----- EMPLOYEE DATABASE -----
+
+Employee Number: 92
+Name: SEJAL
+Salary: 400000.00
+
+Employee Number: 80
+Name: ANUSHKA
+Salary: 400000.00
+
+
+===== EMPLOYEE DATABASE =====
+1. Create
+2. Display
+3. Search
+4. Modify
+5. Sort by Salary
+6. Exit
+Enter your choice: 3
+
+Enter employee number to search: 80
+
+Employee Found
+Employee Number: 80
+Name: ANUSHKA
+Salary: 400000.00
+
+===== EMPLOYEE DATABASE =====
+1. Create
+2. Display
+3. Search
+4. Modify
+5. Sort by Salary
+6. Exit
+Enter your choice: 4
+
+Enter employee number to modify: 92
+Enter new name: SEJAL
+Enter new salary: 500000
+
+Employee modified successfully.
+
+===== EMPLOYEE DATABASE =====
+1. Create
+2. Display
+3. Search
+4. Modify
+5. Sort by Salary
+6. Exit
+Enter your choice: 5
+
+Employees sorted by salary successfully.
+----- SORTED DATABASE -----
+
+80  ANUSHKA  400000.00
+92  SEJAL  500000.00
+
+===== EMPLOYEE DATABASE =====
+1. Create
+2. Display
+3. Search
+4. Modify
+5. Sort by Salary
+6. Exit
+Enter your choice: 6
+
+Program ended.
