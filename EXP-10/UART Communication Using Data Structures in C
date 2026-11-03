@@ -1,0 +1,109 @@
+#include <stdio.h>
+
+#define MAX 5
+
+char tx[MAX], rx[MAX];
+
+int front1 = 0, rear1 = -1;
+int front2 = 0, rear2 = -1;
+
+void send(char ch)
+{
+    if((rear1 + 1) % MAX == front1)
+    {
+        printf("TX Buffer Full\n");
+        return;
+    }
+
+    if(rear1 == -1)
+        front1 = 0;
+
+    rear1 = (rear1 + 1) % MAX;
+    tx[rear1] = ch;
+
+    printf("Sent: %c\n", ch);
+}
+
+void receive(char ch)
+{
+    if((rear2 + 1) % MAX == front2)
+    {
+        printf("RX Buffer Full\n");
+        return;
+    }
+
+    if(rear2 == -1)
+        front2 = 0;
+
+    rear2 = (rear2 + 1) % MAX;
+    rx[rear2] = ch;
+
+    printf("Received: %c\n", ch);
+}
+
+void readData()
+{
+    if(rear2 == -1)
+    {
+        printf("RX Buffer Empty\n");
+        return;
+    }
+
+    printf("Data read: %c\n", rx[front2]);
+
+    if(front2 == rear2)
+    {
+        front2 = 0;
+        rear2 = -1;
+    }
+    else
+    {
+        front2 = (front2 + 1) % MAX;
+    }
+}
+
+int main()
+{
+    int choice;
+    char ch;
+
+    do
+    {
+        printf("\n1. Send Data");
+        printf("\n2. Receive Data");
+        printf("\n3. Read Received Data");
+        printf("\n4. Exit");
+
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch(choice)
+        {
+            case 1:
+                printf("Enter character to send: ");
+                scanf(" %c", &ch);
+                send(ch);
+                break;
+
+            case 2:
+                printf("Enter received character: ");
+                scanf(" %c", &ch);
+                receive(ch);
+                break;
+
+            case 3:
+                readData();
+                break;
+
+            case 4:
+                printf("Exiting...");
+                break;
+
+            default:
+                printf("Invalid choice");
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
